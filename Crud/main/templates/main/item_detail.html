@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Item Detail{% endblock %}
+{% block content %}
+<h1>Item Detail</h1>
+<p><strong>Name:</strong> {{ item.name }}</p>
+<p><strong>Description:</strong> {{ item.description }}</p>
+<p><strong>Price:</strong> ${{ item.price }}</p>
+
+<h3>Purchase or Rent</h3>
+<form method="post" action="{% url 'purchase_item' item.pk %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Purchase/Rent</button>
+</form>
+
+<a href="{% url 'item_update' item.pk %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'item_delete' item.pk %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'item_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}
